@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}{{r.name}}{% endblock %}
+
+{% block body %}
+<header>
+  <!-- Background image -->
+  <div
+    class="p-5 text-center bg-image"
+    style="
+      background-position-y: center;
+      height: auto;
+      background-image:url({{back_url}})
+    "
+  >
+    <div class="mask" style="">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">POS demo project</h1>
+          <h4 class="mb-3">Admin page</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Background image -->
+</header>
+<br><br><br><br>
+<div class="container">
+<h4>Phone: </h4>{{b.cus_phone}}<br><br>
+<h4>Date: </h4> {{b.date}}<br><br>
+<h4>Bill details: </h4><br>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Price/each ($)</th>
+        <th scope="col">Price ($)</th>
+      </tr>
+    </thead>
+    <tbody id="table_body">
+      {% for dish in  b_i %}
+      <tr>
+        <td class="dishname">{{dish.name}}</td>
+        <td> {{dish.amount}}</td>
+        <td class="count-me" id="price_total_{{dish.name}}">{{dish.price_each}}</td>
+        <td class="count-me" id="price_total_{{dish.name}}">{{dish.price}}</td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td></td>
+        <td></td>
+        <td>Total ($)</td>
+        <td id="price_total">{{b.price_total}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% if b.finish %}
+    <button style="width: 20%;" type="submit">UNCHECK</button>
+    {%else%}
+    <button style="width: 20%;" type="submit">CHECK</button>
+    {% endif %}
+  </form>
+  </div>
+{% endblock %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}

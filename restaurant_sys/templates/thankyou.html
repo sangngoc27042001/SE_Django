@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}{{r.name}}{% endblock %}
+
+{% block body %}
+<header>
+  <!-- Background image -->
+  <div
+    class="p-5 text-center bg-image"
+    style="
+      background-color: #EEEDE7;
+      background-position-y: center;
+      height: auto;
+      background-image:url({{back_url}})
+    "
+  >
+    <div class="mask" style="">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">POS demo project</h1>
+          <h4 class="mb-3">Admin page</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Background image -->
+</header>
+<div style="background-image: url(https://media-cdn.tripadvisor.com/media/photo-s/1b/67/cc/f8/chestnut-restaurant.jpg); padding: auto;"></div>
+    <h1>Thank you for your order!!!</h1>
+    <button style="margin: auto;"><a href="/view/{{r.name}}">Return to the menu page</a></button>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}

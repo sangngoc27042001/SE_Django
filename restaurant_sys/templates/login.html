@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}{{r.name}}{% endblock %}
+
+{% block body %}
+<header>
+  <!-- Background image -->
+  <div
+    class="p-5 text-center bg-image"
+    style="
+      background-color: #EEEDE7;
+      background-position-y: center;
+      height: auto;
+      background-image:url({{back_url}})
+    "
+  >
+    <div class="mask" style="">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">POS demo project</h1>
+          <h4 class="mb-3">Wellcome</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Background image -->
+</header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <div style="width:20px"></div>
+      <image style="width:50px" src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HCMUT_official_logo.png/238px-HCMUT_official_logo.png'>
+      <div style="width:20px"></div>
+      <li class="nav-item">
+        <a class="nav-link" href="javascript:history.back()">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/login"><b>Login</b></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<form method="POST" action="/login" style="background-size: auto;background-image:url({{back_url}});"> 
+    {% csrf_token %}
+    <section class="vh-100">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+      
+                  <h3 class="mb-5">Sign in as staff</h3>
+      
+                  <div class="form-outline mb-4">
+                    <input name="username" type="username" id="typeEmailX" class="form-control form-control-lg" />
+                    <label class="form-label" for="typeEmailX">Username</label>
+                  </div>
+      
+                  <div class="form-outline mb-4">
+                    <input name="password" type="password" id="typePasswordX" class="form-control form-control-lg" />
+                    <label name="password" class="form-label" for="typePasswordX">Password</label>
+                  </div>
+      
+                  <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button><br>
+                  {% for message in messages %}
+                  <div class="alert alert-warning" role="alert">
+                    {{message}}
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</form>
+{% endblock %}
+
+{% block script %}
+<script>
+</script>
+{% endblock %}

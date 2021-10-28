@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}{{r.name}}{% endblock %}
+
+{% block body %}
+<header>
+  <!-- Background image -->
+  <div
+    class="p-5 text-center bg-image"
+    style="
+      background-color: #EEEDE7;
+      background-position-y: center;
+      height: auto;
+      background-image:url({{back_url}})
+    "
+  >
+    <div class="mask" style="">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">POS demo project</h1>
+          <h4 class="mb-3">Admin page</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Background image -->
+</header>
+
+<div style="padding:20px ;background-color: #EEEDE7; padding: auto;
+      background-image:url({{back_url}})">
+  <div style="margin: auto;width: 70%;background-color: rgba(255,255,255, 1); padding: 20px;">
+<form action="order" method="POST">
+  <h2>Infomation</h2>
+  <label>Your phone number</label>
+  <input type="tel" name="cus_phone" required>
+  <input type="hidden" name="restname" value="{{r.name}}" required>
+  <h2>Bill</h2>
+{% csrf_token %}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Price/Item ($)</th>
+        <th scope="col">Price ($)</th>
+      </tr>
+    </thead>
+    <tbody id="table_body">
+      {% for dish in  dishes %}
+      <tr>
+        <td class="dishname">{{dish.name}}</td>
+        <td><input name="{{dish.name}}" style="width: 60%;" value="1" id="amount_{{dish.name}}" type="number" min="1" onchange="count_price('{{dish.name}}')"></td>
+        <td id="price_{{dish.name}}">{{dish.price}}</td>
+        <td class="count-me" id="price_total_{{dish.name}}">{{dish.price}}</td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <td></td>
+        <td></td>
+        <td>Total ($)</td>
+        <td id="price_total"></td>
+      </tr>
+    </tbody>
+  </table>
+  <input value="PURCHASE" type="submit"></input>
+</form>
+</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    count_total_price();
+    table_body=document.getElementById('table_body').getElementsByTagName('td');
+
+    var dish_array=[];
+    for(var i = 0; i < table_body.length; i ++) {
+            if(table_body[i].className == 'dishname') {
+                dish_array.push(table_body[i].innerHTML)
+            }
+        }
+    document.getElementById("dish_array").value=dish_array.toString();
+
+    function count_total_price(){
+        table_body=document.getElementById('table_body').getElementsByTagName('td');
+        var sum = 0;
+        for(var i = 0; i < table_body.length; i ++) {
+                if(table_body[i].className == 'count-me') {
+                    sum += parseFloat(table_body[i].innerHTML.split(" "));
+                }
+            }
+        document.getElementById("price_total").innerHTML=round(sum);
+    }
+    function count_price(name){
+        amount=document.getElementById("amount_"+name).value;
+        price=document.getElementById("price_"+name).innerHTML;
+        document.getElementById("price_total_"+name).innerHTML=round(price*amount);
+        count_total_price()
+    }
+    function round(num){
+        return Math.round(num * 100)/100;
+    }
+</script>
+{% endblock %}

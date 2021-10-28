@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block title %}{{r.name}}{% endblock %}
+
+{% block body %}
+<header>
+  <!-- Background image -->
+  <div
+    class="p-5 text-center bg-image"
+    style="
+      background-color: #EEEDE7;
+      background-position-y: center;
+      height: auto;
+      background-image:url({{back_url}})
+    "
+  >
+    <div class="mask" style="">
+      <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="text-white">
+          <h1 class="mb-3">{{r.name}}</h1>
+          <h4 class="mb-3">{{r.address}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Background image -->
+</header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <div style="width:20px"></div>
+      <image style="width:50px" src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/HCMUT_official_logo.png/238px-HCMUT_official_logo.png'>
+      <div style="width:20px"></div>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><b>Home</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" onclick="seemycart()">My cart
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+          <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
+          <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+        </svg></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div style="
+background-color: #EEEDE7;
+background-image:url({{back_url}})
+">
+<div>
+<form id="form" style="width: 20%;align-content:right" action="{{r.name}}/buy" method=POST>
+    {% csrf_token %}
+    <input name="input" type="hidden" id="input">
+    <div style="width: 100%; background-color:white" class="d-flex justify-content-center">
+  </div>
+</form>
+</div>
+<div class= "container-fluid">
+  <div class= "row" style="padding: 10px;">
+     {% for food in f %}
+     <div class ="col-12 col-sm-6 col-md-4" style="padding:20px">
+     <div style="color:black; background-color: whitesmoke; padding:10px; border-radius:10px">
+      <img src={{food.image.url}} height="350" width="100%" ><br>
+      <h5>{{food.name}}</h5>
+      <h5>{{food.price}} $</h5>
+      <button onclick="add_item('{{food.name}}')" type="button" class="btn btn-default btn-sm" style="background-color: orange;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+          <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
+          <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+        </svg>
+        Add to cart 
+      </button>
+      <div style="height: 10px;"></div>
+      </div>
+    </div>
+      {% endfor %}
+  </div>
+</div>
+<div class= "container-fluid">
+  <div style="padding: 10px;" class= "row">
+     {% for drink in d %}
+      <div class ="col-12 col-sm-6 col-md-4" style="padding:20px">
+     <div style="color:black; background-color: whitesmoke; padding:10px; border-radius:10px">
+      <img src={{drink.image.url}} height="350" width="100%"><br>
+      <h5>{{drink.name}}</h5>
+      <h5>{{drink.price}} $</h5>
+      <button onclick="add_item('{{drink.name}}')" type="button" class="btn btn-default btn-sm" style="background-color: orange;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+          <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
+          <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+        </svg>
+        Add to cart 
+      </button>
+      <div style="height: 10px;"></div>
+      </div>
+    </div>
+      {% endfor %}
+  </div>
+</div>
+
+</div>
+<div classs="container p-5">
+	<div class="row no-gutters fixed-top">
+		<div id="alert" class="col-lg-5 col-md-12">
+			
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  orderlist = new Set();
+  function add_item(item){
+    orderlist.add(item);
+    console.log(orderlist);
+    document.getElementById("input").value=Array.from(orderlist).toString();
+    console.log(document.getElementById("input").value);
+    alert_func(item);
+  }
+  function seemycart(){
+      if(orderlist.size==0)
+      {
+        document.getElementById("alert").innerHTML='<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Warning!</strong> You havent choose any thing.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+        setTimeout(function() {
+          document.getElementById("alert").innerHTML='';
+        },1500)
+      }
+      else{
+        document.getElementById("form").submit()
+      }
+     
+  }
+  
+function alert_func(a){
+  document.getElementById("alert").innerHTML='<div class="alert alert-primary alert-dismissible fade show" role="alert"><strong>Great!</strong> '+a+' put in your cart.<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+  setTimeout(function() {
+    document.getElementById("alert").innerHTML='';
+  },2000)
+}
+</script>
+{% endblock %}
