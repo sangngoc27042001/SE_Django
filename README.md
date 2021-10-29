@@ -12,6 +12,7 @@ Sang123123
 ```
 - LIst of usable URL
 > admin/
+> 
 > /hello
 > view/<restname>
 > view/<restname>/buy
