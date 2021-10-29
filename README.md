@@ -10,3 +10,21 @@ python manage.py runserver
 sang
 Sang123123
 ```
+- LIst of usable URL
+> admin/
+> 
+> /hello
+> 
+> view/<restname>
+>  
+> view/<restname>/buy
+> 
+> view/<restname>/order
+>
+> login
+>
+> logout
+>
+> manage_order
+>
+> manage_order_detail/<order_id>
