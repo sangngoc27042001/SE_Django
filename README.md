@@ -1,4 +1,4 @@
-# SE
+# Software Engineering Assignment
 ## How to use?
 - Turn on the command line, run the command:
 ```
