@@ -4,13 +4,26 @@
 ```
 python manage.py runserver
 ```
-- Note that if the terminal warns that you lack of any libraries, you have to install it.
-- To sign in as a superuser, using the account:
-```
-sang
-Sang123123
-```
-- LIst of usable URL
+*\*Note: If the terminal warns you about the lack of any libraries, you have to install it.*
+
+- Use the sample login credentials 🔐:
+
+Username | Password | Admin privileges
+| :---: | :---: | :---:
+sang  | Sang123123 | Yes
+giang  | usethistologin | Yes
+staff1 | imjustastaff | No
+
+Or alternatively, you can browser the restaurant page as a guest and place an order.
+
+- List of current restaurants
+
+Restaurant name
+| :---:
+sakura 
+Cool Restaurant
+
+- List of usable URL 💻
 > admin/
 > 
 > hello
