@@ -13,7 +13,7 @@ Sang123123
 - LIst of usable URL
 > admin/
 > 
-> /hello
+> hello
 > 
 > view/<restname>
 >  
